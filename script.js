@@ -102,20 +102,31 @@ function getPasswordOptions() {
   while (!isPassLengthCorrect) {
     passLength = Number(prompt("Enter length of password (10-64): "));
     if (passLength >= 10 && passLength <= 64) {
+      passwordOptions.passLength = passLength;
       isPassLengthCorrect = true;
     }
   }
-  passwordOptions.passLength = passLength;
 
   let wantLowercase = prompt("Do you want lowercase letters? (OK/Cancel): ");
   if (wantLowercase !== null) {
     passwordOptions.passLowercase = true;
   }
 
-  let wantUppercase = prompt("Do you want lowercase letters? (OK/Cancel): ");
+  let wantUppercase = prompt("Do you want uppercase letters? (OK/Cancel): ");
   if (wantUppercase !== null) {
     passwordOptions.passUppercase = true;
   }
+
+  let wantNumeric = prompt("Do you want numbers? (OK/Cancel): ");
+  if (wantNumeric !== null) {
+    passwordOptions.passNumeric = true;
+  }
+
+  let wantSpecial = prompt("Do you want special characters? (OK/Cancel): ");
+  if (wantSpecial !== null) {
+    passwordOptions.passSpecial = true;
+  }
+
   console.log(passwordOptions);
 }
 getPasswordOptions();
