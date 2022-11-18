@@ -87,7 +87,14 @@ var upperCasedCharacters = [
   "Y",
   "Z",
 ];
-
+let userPassword = "";
+let passwordOptions = {
+  passLength: 0,
+  passLowercase: false,
+  passUppercase: false,
+  passNumeric: false,
+  passSpecial: false,
+};
 // Function to prompt user for password options
 function getPasswordOptions() {
   let passLength;
@@ -98,7 +105,18 @@ function getPasswordOptions() {
       isPassLengthCorrect = true;
     }
   }
-  // console.log(passLength);
+  passwordOptions.passLength = passLength;
+
+  let wantLowercase = prompt("Do you want lowercase letters? (OK/Cancel): ");
+  if (wantLowercase !== null) {
+    passwordOptions.passLowercase = true;
+  }
+
+  let wantUppercase = prompt("Do you want lowercase letters? (OK/Cancel): ");
+  if (wantUppercase !== null) {
+    passwordOptions.passUppercase = true;
+  }
+  console.log(passwordOptions);
 }
 getPasswordOptions();
 
