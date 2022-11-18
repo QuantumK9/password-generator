@@ -89,7 +89,18 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
-function getPasswordOptions() {}
+function getPasswordOptions() {
+  let passLength;
+  let isPassLengthCorrect = false;
+  while (!isPassLengthCorrect) {
+    passLength = Number(prompt("Enter length of password (10-64): "));
+    if (passLength >= 10 && passLength <= 64) {
+      isPassLengthCorrect = true;
+    }
+  }
+  // console.log(passLength);
+}
+getPasswordOptions();
 
 // Function for getting a random element from an array
 function getRandom(arr) {
