@@ -123,13 +123,15 @@ function getPasswordOptions() {
   }
 
   let wantSpecial = prompt("Do you want special characters? (OK/Cancel): ");
-  if (wantSpecial !== null) {
+  if (wantSpecial === null) {
+    passwordOptions.specialCharacters = null;
+  } else {
     passwordOptions.specialCharacters = specialCharacters;
   }
 
-  // console.log(passwordOptions); // for testing
+  console.log(passwordOptions); // for testing
 }
-// getPasswordOptions();
+// getPasswordOptions(); // for testing
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -141,6 +143,8 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
+  // call function for user options
+  getPasswordOptions();
   // a higher order array to store arrays of characters selected from prompts
   let chosenArray = [];
   let generatedPassword = "";
@@ -160,13 +164,13 @@ function generatePassword() {
     generatedPassword += randomCharacter;
   }
   // console.log("finished");
-  // console.log("password: " + generatedPassword);
+  console.log("password: " + generatedPassword);
   return generatedPassword;
 }
-// generatePassword();
+// generatePassword(); // for testing
 
 // Get references to the #generate element
-// var generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
@@ -177,4 +181,4 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", writePassword);
