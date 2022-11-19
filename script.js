@@ -90,10 +90,10 @@ var upperCasedCharacters = [
 let userPassword = "";
 let passwordOptions = {
   passLength: 0,
-  passLowercase: false,
-  passUppercase: false,
-  passNumeric: false,
-  passSpecial: false,
+  lowerCasedCharacters: null,
+  upperCasedCharacters: null,
+  numericCharacters: null,
+  specialCharacters: null,
 };
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -109,22 +109,22 @@ function getPasswordOptions() {
 
   let wantLowercase = prompt("Do you want lowercase letters? (OK/Cancel): ");
   if (wantLowercase !== null) {
-    passwordOptions.passLowercase = true;
+    passwordOptions.lowerCasedCharacters = lowerCasedCharacters;
   }
 
   let wantUppercase = prompt("Do you want uppercase letters? (OK/Cancel): ");
   if (wantUppercase !== null) {
-    passwordOptions.passUppercase = true;
+    passwordOptions.upperCasedCharacters = upperCasedCharacters;
   }
 
   let wantNumeric = prompt("Do you want numbers? (OK/Cancel): ");
   if (wantNumeric !== null) {
-    passwordOptions.passNumeric = true;
+    passwordOptions.numericCharacters = numericCharacters;
   }
 
   let wantSpecial = prompt("Do you want special characters? (OK/Cancel): ");
   if (wantSpecial !== null) {
-    passwordOptions.passSpecial = true;
+    passwordOptions.specialCharacters = specialCharacters;
   }
 
   console.log(passwordOptions);
@@ -140,7 +140,18 @@ function getRandom(arr) {
 // console.log(getRandom(numericCharacters)); //testing
 
 // Function to generate password with user input
-function generatePassword() {}
+function generatePassword() {
+  // a higher order array to store arrays of characters selected from prompts
+  let chosenArray = [];
+  Object.entries(passwordOptions).forEach(([key, value]) => {
+    if (value && typeof value !== "number") {
+      // console.log(key);
+      chosenArray.push(value);
+    }
+  });
+  // console.log(chosenArray); //for testing
+}
+generatePassword();
 
 // Get references to the #generate element
 // var generateBtn = document.querySelector("#generate");
