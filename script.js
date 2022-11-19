@@ -87,7 +87,7 @@ var upperCasedCharacters = [
   "Y",
   "Z",
 ];
-let userPassword = "";
+// object that holds users preferences
 let passwordOptions = {
   passLength: 0,
   lowerCasedCharacters: null,
@@ -106,7 +106,7 @@ function getPasswordOptions() {
       isPassLengthCorrect = true;
     }
   }
-
+  // if user chooses type of character, that puts array in the right key of the passwordOptions object
   let wantLowercase = prompt("Do you want lowercase letters? (OK/Cancel): ");
   if (wantLowercase !== null) {
     passwordOptions.lowerCasedCharacters = lowerCasedCharacters;
@@ -127,9 +127,9 @@ function getPasswordOptions() {
     passwordOptions.specialCharacters = specialCharacters;
   }
 
-  console.log(passwordOptions);
+  // console.log(passwordOptions); // for testing
 }
-getPasswordOptions();
+// getPasswordOptions();
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -143,6 +143,7 @@ function getRandom(arr) {
 function generatePassword() {
   // a higher order array to store arrays of characters selected from prompts
   let chosenArray = [];
+  let generatedPassword = "";
   Object.entries(passwordOptions).forEach(([key, value]) => {
     if (value && typeof value !== "number") {
       // console.log(key);
@@ -150,8 +151,19 @@ function generatePassword() {
     }
   });
   // console.log(chosenArray); //for testing
+  // randomly choose elements from random sub-arrays
+  for (let i = 1; i <= passwordOptions.passLength; i++) {
+    let randomSubArray = getRandom(chosenArray);
+    // console.log(randomSubArray);
+    let randomCharacter = getRandom(randomSubArray);
+    // console.log(i + " : " + randomCharacter);
+    generatedPassword += randomCharacter;
+  }
+  // console.log("finished");
+  // console.log("password: " + generatedPassword);
+  return generatedPassword;
 }
-generatePassword();
+// generatePassword();
 
 // Get references to the #generate element
 // var generateBtn = document.querySelector("#generate");
