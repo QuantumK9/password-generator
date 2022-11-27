@@ -128,10 +128,7 @@ function getPasswordOptions() {
   } else {
     passwordOptions.specialCharacters = specialCharacters;
   }
-
-  console.log(passwordOptions); // for testing
 }
-// getPasswordOptions(); // for testing
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -139,7 +136,6 @@ function getRandom(arr) {
   let randomElement = arr[randomIndex];
   return randomElement;
 }
-// console.log(getRandom(numericCharacters)); //testing
 
 // Function to generate password with user input
 function generatePassword() {
@@ -150,24 +146,19 @@ function generatePassword() {
   let generatedPassword = "";
   Object.entries(passwordOptions).forEach(([key, value]) => {
     if (value && typeof value !== "number") {
-      // console.log(key);
       chosenArray.push(value);
     }
   });
-  // console.log(chosenArray); //for testing
+
   // randomly choose elements from random sub-arrays
   for (let i = 1; i <= passwordOptions.passLength; i++) {
     let randomSubArray = getRandom(chosenArray);
-    // console.log(randomSubArray);
     let randomCharacter = getRandom(randomSubArray);
-    // console.log(i + " : " + randomCharacter);
     generatedPassword += randomCharacter;
   }
-  // console.log("finished");
-  console.log("password: " + generatedPassword);
+
   return generatedPassword;
 }
-// generatePassword(); // for testing
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
