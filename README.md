@@ -1,10 +1,10 @@
-# password-generator
-Javascript Password Generator Page
+# Password Generator
+
 ## Description
 
 This is a Javascript challenge which generates a random password, after taking input from the user about the type of characters that should be in the password and about its length.
 
-The purpose of this challenge is to use arrays and objects, store characters in them and the user's preferences, loop through them and randomly choose elements to generate a password.
+The purpose of this challenge is to use arrays and objects, store characters in them and the user's preferences, loop through them and randomly choose elements according to user's choices and generate a password.
 ## Installation (optional)
 
 If someone wants to, they can download the code from the following repository: 
