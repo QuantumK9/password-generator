@@ -155,20 +155,23 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
+  let generatedPassword = "";
   // reset previous password options
   resetPasswordOptions();
   // call function for user options
   getPasswordOptions();
   if (passwordOptions.atLeastOneTypeSelected === false) {
     alert("You must choose at least one character! Try again!");
+    let passwordText = document.querySelector("#password");
 
+    passwordText.value = " ";
     location.reload();
 
-    return;
+    return generatedPassword;
   }
   // a higher order array to store arrays of characters selected from prompts
   let chosenArray = [];
-  let generatedPassword = "";
+
   Object.entries(passwordOptions).forEach(([key, value]) => {
     if (value && typeof value !== "number" && typeof value !== "boolean") {
       chosenArray.push(value);
