@@ -94,6 +94,7 @@ let passwordOptions = {
   upperCasedCharacters: null,
   numericCharacters: null,
   specialCharacters: null,
+  atLeastOneTypeSelected: false,
 };
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -110,16 +111,19 @@ function getPasswordOptions() {
   let wantLowercase = prompt("Do you want lowercase letters? (OK/Cancel): ");
   if (wantLowercase !== null) {
     passwordOptions.lowerCasedCharacters = lowerCasedCharacters;
+    passwordOptions.atLeastOneTypeSelected = true;
   }
 
   let wantUppercase = prompt("Do you want uppercase letters? (OK/Cancel): ");
   if (wantUppercase !== null) {
     passwordOptions.upperCasedCharacters = upperCasedCharacters;
+    passwordOptions.atLeastOneTypeSelected = true;
   }
 
   let wantNumeric = prompt("Do you want numbers? (OK/Cancel): ");
   if (wantNumeric !== null) {
     passwordOptions.numericCharacters = numericCharacters;
+    passwordOptions.atLeastOneTypeSelected = true;
   }
 
   let wantSpecial = prompt("Do you want special characters? (OK/Cancel): ");
@@ -127,7 +131,19 @@ function getPasswordOptions() {
     passwordOptions.specialCharacters = null;
   } else {
     passwordOptions.specialCharacters = specialCharacters;
+    passwordOptions.atLeastOneTypeSelected = true;
   }
+}
+// Function that resets previous password options (after each refresh)
+function resetPasswordOptions() {
+  passwordOptions = {
+    passLength: 0,
+    lowerCasedCharacters: null,
+    upperCasedCharacters: null,
+    numericCharacters: null,
+    specialCharacters: null,
+    atLeastOneTypeSelected: false,
+  };
 }
 
 // Function for getting a random element from an array
@@ -139,13 +155,25 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
+  let generatedPassword = "";
+  // reset previous password options
+  resetPasswordOptions();
   // call function for user options
   getPasswordOptions();
+  if (passwordOptions.atLeastOneTypeSelected === false) {
+    alert("You must choose at least one character! Try again!");
+    let passwordText = document.querySelector("#password");
+
+    passwordText.value = " ";
+    location.reload();
+
+    return generatedPassword;
+  }
   // a higher order array to store arrays of characters selected from prompts
   let chosenArray = [];
-  let generatedPassword = "";
+
   Object.entries(passwordOptions).forEach(([key, value]) => {
-    if (value && typeof value !== "number") {
+    if (value && typeof value !== "number" && typeof value !== "boolean") {
       chosenArray.push(value);
     }
   });
